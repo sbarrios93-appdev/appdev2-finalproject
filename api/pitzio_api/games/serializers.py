@@ -9,6 +9,7 @@ class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = "__all__"
+        lookup_field = "id"
         read_only_fields = ("id", "created_at", "updated_at")
         depth = 1
 

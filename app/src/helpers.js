@@ -1,5 +1,9 @@
 function isAuthenticated() {
-  return !!localStorage.getItem("access_token");
+  if (localStorage.getItem("access_token")) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export default isAuthenticated;

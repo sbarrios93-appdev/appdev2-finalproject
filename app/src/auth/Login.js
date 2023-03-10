@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import API_URL from "../config";
-import isAuthenticated from "../helpers";
-
-function Login() {
+import { Card, Label, TextInput, Button } from "flowbite-react";
+function Login({ setIsAuth }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,38 +17,50 @@ function Login() {
         password,
       });
       localStorage.setItem("access_token", response.data.access);
-      if (isAuthenticated()) {
-        navigate("/home", { replace: true });
-      } else {
-        navigate("/welcome", { replace: true });
-      }
+      setIsAuth(true);
+      navigate("/home", { replace: true });
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
+    <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4 sm:px-2 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-sky-200">
+            Log in
+          </h2>
+        </div>
       </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
+      <div className="max-w-lg mt-8">
+        <Card>
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <div className="mb-2 block">
+              <Label htmlFor="email">Email:</Label>
+              <TextInput
+                type="email"
+                id="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required={true}
+              />
+            </div>
+            <div>
+              <Label htmlFor="password">Password:</Label>
+              <TextInput
+                type="password"
+                id="password"
+                value={password}
+                required={true}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </div>
+            <Button type="submit">Login</Button>
+          </form>
+        </Card>
       </div>
-      <button type="submit">Login</button>
-    </form>
+    </div>
   );
 }
 

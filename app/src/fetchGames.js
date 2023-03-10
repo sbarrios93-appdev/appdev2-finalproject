@@ -19,7 +19,7 @@ export async function fetchAllGames() {
 export async function fetchGame(id) {
   const token = localStorage.getItem("access_token");
 
-  const response = await fetch(`${API_URL}/games/?=${id}`, {
+  const response = await fetch(`${API_URL}/games/?id=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -30,4 +30,32 @@ export async function fetchGame(id) {
   }
 
   return response.json();
+}
+
+export async function lookUpPlayerInGame({ queryKey }) {
+  const token = localStorage.getItem("access_token");
+  const { playerId, gameId, side } = queryKey[1];
+
+  const response = await fetch(
+    `${API_URL}/games/teams/?game_id=${gameId}&side=${side}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  for (const team of response) {
+    for (const player of team.players) {
+      if (player.id === playerId) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 }

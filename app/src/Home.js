@@ -14,12 +14,18 @@ function Home() {
   return (
     <div>
       <header className="App-header">
-        <h1>Airbnb-style Listings</h1>
+        <div className="pb-3">
+          <h2 className="mt-6 text-left text-3xl font-extrabold text-sky-200">
+            Available Games
+          </h2>
+        </div>
       </header>
       <main>
-        {games.map((game) => (
-          <GameCard key={game.id} game={game} />
-        ))}
+        <div className="space-y-8">
+          {games.map((game) => (
+            <GameCard key={game.id} game={game} />
+          ))}
+        </div>
       </main>
     </div>
   );
