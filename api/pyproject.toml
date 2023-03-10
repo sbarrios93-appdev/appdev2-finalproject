@@ -1,0 +1,78 @@
+[tool.poetry]
+name = "Pitzio API"
+version = "0.1.0"
+description = "API Backend for Pitzio"
+authors = ["Sebastian Barrios <seba@pitzio.com>"]
+readme = "README.md"
+packages = [{ include = "pitzio_api" }]
+
+[tool.poetry.dependencies]
+python = ">=3.10 <3.11"
+django = "^4.1.3"
+django-rest-framework = "^0.1.0"
+pylint = "^2.15.6"
+django-cors-headers = "^3.13.0"
+pillow = "^9.3.0"
+djangorestframework-simplejwt = "^5.2.2"
+django-rest-auth = { extras = ["with-social"], version = "^0.9.5" }
+psycopg2 = "^2.9.5"
+django-money = "^3.0.0"
+factory-boy = "^3.2.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = { extras = ["d"], version = "^22.10.0" }
+mypy = "^0.991"
+flake8 = "^5.0.4"
+python-dotenv = "^0.21.0"
+djlint = "^1.19.7"
+django-stubs = "^1.13.0"
+typing-extensions = "^4.4.0"
+pylint-django = "^2.5.3"
+
+flake8-isort = "^5.0.3"
+djangorestframework-stubs = { extras = ["compatible-mypy"], version = "^1.8.0" }
+
+
+[tool.poetry.group.test.dependencies]
+pytest-cov = "^4.0.0"
+coverage = "^6.5.0"
+django-coverage-plugin = "^2.0.4"
+pytest-django = "^4.5.2"
+
+
+[tool.poetry.group.erd.dependencies]
+django-extensions = "^3.2.1"
+graphviz = "^0.20.1"
+pydot = "^1.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+known_first_party = ["pitzio_api", "config"]
+include_trailing_comma = true
+multi_line_output = 3
+use_parentheses = true
+line_length = 88
+skip_glob = "migrations/**"
+profile = "black"
+
+[tool.mypy]
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+python_version = "3.10"
+follow_imports = "normal"
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
+
+[tool.pytest.ini_options]
+addopts = ["--cov=pitzio_api", "--cov-report=html", "--cov-report=term"]
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+DJANGO_SETTINGS_MODULE = "config.settings"
