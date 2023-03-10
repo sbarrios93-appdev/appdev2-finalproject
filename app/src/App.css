@@ -1,0 +1,77 @@
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.App-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.GameCard {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.GameCard img {
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.GameCardContent {
+  padding: 1rem;
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.GameCardContent h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.GameCardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #f2f2f2;
+}
+
+.GameCardFooter span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.GameCardFooter button {
+  font-size: 1.2rem;
+  background-color: #008489;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .App {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .GameCard {
+    flex-direction: row;
+    height: 250px;
+  }
+}
